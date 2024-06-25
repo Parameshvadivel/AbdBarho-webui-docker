@@ -16,6 +16,13 @@ WORKDIR ${ROOT}
 COPY . /docker/
 RUN chmod u+x /docker/entrypoint.sh && cp /docker/extra_model_paths.yaml ${ROOT}
 
+cd /data/config/comfy/custom_nodes
+
+    echo "Installing ComfyUI Manager..."
+    git clone https://github.com/ltdrdata/ComfyUI-Manager.git
+
+    cd /
+
 ENV NVIDIA_VISIBLE_DEVICES=all PYTHONPATH="${PYTHONPATH}:${PWD}" CLI_ARGS=""
 EXPOSE 7860
 ENTRYPOINT ["/docker/entrypoint.sh"]
